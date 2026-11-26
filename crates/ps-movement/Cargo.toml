@@ -1,0 +1,25 @@
+[package]
+name = "engine-movement"
+description = "Projet S: Source/CS:GO-style kinematic player movement shared by server and client prediction"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+
+[dependencies]
+engine-core.workspace = true
+engine-physics.workspace = true
+glam.workspace = true
+serde.workspace = true
+
+[dev-dependencies]
+criterion.workspace = true
+
+[[bench]]
+name = "movement"
+harness = false
+
+[lints]
+workspace = true

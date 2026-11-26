@@ -1,0 +1,34 @@
+[package]
+name = "game-sim"
+description = "Projet S: authoritative game simulation (players, shooting, grenades, smoke, bomb, bots)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+
+[dependencies]
+engine-core.workspace = true
+engine-physics.workspace = true
+engine-movement.workspace = true
+engine-weapons.workspace = true
+engine-hitreg.workspace = true
+game-rules.workspace = true
+glam.workspace = true
+serde.workspace = true
+toml.workspace = true
+ron.workspace = true
+postcard.workspace = true
+engine-network.workspace = true
+engine-replay.workspace = true
+
+[dev-dependencies]
+criterion.workspace = true
+
+[[bench]]
+name = "sim"
+harness = false
+
+[lints]
+workspace = true
