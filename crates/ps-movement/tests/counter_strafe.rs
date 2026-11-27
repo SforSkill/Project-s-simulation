@@ -1,7 +1,7 @@
 //! Counter-strafe: Source physics vs buffered cut.
 //!
 //! Run with `cargo test -p engine-movement --test counter_strafe -- --nocapture`
-//! to print the comparison table recorded in `VALIDATION_REPORT.md`.
+//! to print the comparison table recorded in `docs/validation-report.md`.
 
 mod common;
 
