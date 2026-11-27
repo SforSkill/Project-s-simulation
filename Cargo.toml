@@ -48,6 +48,15 @@ opt-level = 1
 [profile.dev.package."*"]
 opt-level = 3
 
+[profile.release]
+# Même profil que les binaires livrés (Project-s, Project-s-server, Project-s-lab) :
+# sans lui, les benchmarks de ce dépôt mesurent un autre code machine (+12 % sur
+# player_tick_128hz_stairs, mesuré le 2026-11-27).
+lto = "thin"
+codegen-units = 1
+panic = "unwind"
+debug = "line-tables-only"
+
 [workspace.lints.rust]
 unsafe_code = "deny"
 
