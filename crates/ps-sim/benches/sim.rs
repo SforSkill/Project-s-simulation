@@ -1,11 +1,11 @@
 //! Tick cost of the simulation with bots (5v5 on the competitive map).
 
 use criterion::{Criterion, criterion_group, criterion_main};
-use game_sim::{Controller, GameData, Level, Sim, SimConfig};
+use ps_sim::{Controller, GameData, Level, Sim, SimConfig};
 use std::sync::Arc;
 
 fn bench(c: &mut Criterion) {
-    let dir = engine_core::config::find_data_dir();
+    let dir = ps_sim_core::config::find_data_dir();
     let data = Arc::new(GameData::load(&dir).expect("data"));
     let def = data.maps["ps_citadel"].clone();
     let level = Arc::new(Level::build(def, &data.materials, &data.movement).expect("level"));

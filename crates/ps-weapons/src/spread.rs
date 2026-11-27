@@ -1,7 +1,7 @@
 //! Recoil (deterministic) and movement spread (random, velocity dependent).
 
 use crate::defs::WeaponDef;
-use engine_core::DetRng;
+use ps_sim_core::DetRng;
 
 /// Recoil offset `(pitch up, yaw left)` in degrees at a fractional shot index.
 /// Linear interpolation between pattern entries; past the end the last entry holds.

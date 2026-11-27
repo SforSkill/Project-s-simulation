@@ -1,9 +1,9 @@
 //! Events emitted by the simulation (replicated, recorded, shown in the HUD).
 
-use engine_core::{PlayerId, Team};
-use engine_weapons::{GrenadeKind, HitGroup, WeaponId};
-use game_rules::{Phase, RoundEndReason};
 use glam::Vec3;
+use ps_rules::{Phase, RoundEndReason};
+use ps_sim_core::{PlayerId, Team};
+use ps_weapons::{GrenadeKind, HitGroup, WeaponId};
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
 pub enum GameEvent {

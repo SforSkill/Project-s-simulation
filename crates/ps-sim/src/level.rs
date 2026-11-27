@@ -1,12 +1,12 @@
 //! A loaded map: collision world and navigation graph.
 
-use engine_movement::MovementConfig;
-use engine_movement::controller::hull_for;
-use engine_physics::map::MapDef;
-use engine_physics::material::MaterialTable;
-use engine_physics::world::TraceMask;
-use engine_physics::{CollisionWorld, MapError};
 use glam::Vec3;
+use ps_movement::MovementConfig;
+use ps_movement::controller::hull_for;
+use ps_physics::map::MapDef;
+use ps_physics::material::MaterialTable;
+use ps_physics::world::TraceMask;
+use ps_physics::{CollisionWorld, MapError};
 use std::collections::{BinaryHeap, HashMap, VecDeque};
 
 pub struct Level {

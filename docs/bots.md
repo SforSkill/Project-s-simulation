@@ -1,6 +1,6 @@
 # Bots
 
-Code : `crates/game-sim/src/bots.rs` (`BotBrain`, `bot_buy`), navigation : `NavGraph` dans `crates/game-sim/src/level.rs`.
+Code : `crates/ps-sim/src/bots.rs` (`BotBrain`, `bot_buy`), navigation : `NavGraph` dans `crates/ps-sim/src/level.rs`.
 
 Les bots tournent sur le serveur et produisent des `UserCmd` ordinaires : mêmes règles que les humains, aucune aide à la visée, ils contre-straffent avant de tirer. Ils sont déterministes pour une graine donnée (`DetRng`).
 

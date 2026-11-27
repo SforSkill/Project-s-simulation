@@ -1,0 +1,28 @@
+# Simulation: no rendering, no async runtime, no HTTP, no database, no back-end contract.
+[rules."*"]
+forbid = ["bevy*", "wgpu*", "winit", "egui*", "rodio", "cpal", "sqlx*", "postgres*", "tokio*", "axum*", "hyper*", "reqwest*", "ps-server", "ps-visibility", "ps-netclient", "ps-engine*", "ps-core-protocol"]
+
+[rules."ps-sim-core"]
+internal = ["ps-types"]
+
+[rules."ps-physics"]
+internal = ["ps-sim-core"]
+
+[rules."ps-movement"]
+internal = ["ps-sim-core", "ps-physics"]
+
+[rules."ps-weapons"]
+internal = ["ps-sim-core"]
+
+[rules."ps-hitreg"]
+internal = ["ps-sim-core", "ps-weapons"]
+
+[rules."ps-rules"]
+internal = ["ps-sim-core"]
+
+[rules."ps-sim"]
+internal = ["ps-sim-core", "ps-physics", "ps-movement", "ps-weapons", "ps-hitreg", "ps-rules"]
+
+# Only ps-sim-net may touch the wire codec and the replay container.
+[rules."ps-sim-net"]
+internal = ["ps-sim", "ps-sim-core", "ps-movement", "ps-weapons", "ps-rules", "ps-transport", "ps-replay"]

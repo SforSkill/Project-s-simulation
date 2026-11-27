@@ -1,13 +1,13 @@
 //! Counter-strafe: Source physics vs buffered cut.
 //!
-//! Run with `cargo test -p engine-movement --test counter_strafe -- --nocapture`
+//! Run with `cargo test -p ps-movement --test counter_strafe -- --nocapture`
 //! to print the comparison table recorded in `docs/validation-report.md`.
 
 mod common;
 
 use common::*;
-use engine_core::cmd::Buttons;
-use engine_movement::{CounterStrafeMode, MoveState, MovementConfig};
+use ps_movement::{CounterStrafeMode, MoveState, MovementConfig};
+use ps_sim_core::cmd::Buttons;
 
 const L: u32 = Buttons::LEFT;
 const R: u32 = Buttons::RIGHT;
@@ -95,7 +95,7 @@ fn scenario(mode: CounterStrafeMode, hold: f64, hz: u32, both_keys: bool) -> Out
 /// Counter hold time that brings the speed to zero (continuous Source model).
 fn exact_hold(_hz: u32) -> f64 {
     let c = cfg(CounterStrafeMode::Source);
-    engine_movement::controller::counter_stop_time(SPEED, SPEED, &c) as f64
+    ps_movement::controller::counter_stop_time(SPEED, SPEED, &c) as f64
 }
 
 #[test]

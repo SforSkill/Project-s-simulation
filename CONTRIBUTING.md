@@ -1,5 +1,6 @@
 # Contribuer
 
-- Branches, PR, titres de commit et releases : [`docs/git-workflow.md`](docs/git-workflow.md).
-- Construire et vérifier : section « Construire » du [`README.md`](README.md) ; reproduire les mesures : [`docs/validation.md`](docs/validation.md).
-- Documentation : [`docs/README.md`](docs/README.md) ; carte du code : [`docs/codemap.md`](docs/codemap.md).
+- Périmètre du dépôt : [`SCOPE.md`](SCOPE.md). Un changement qui en sort va dans le dépôt responsable ([carte des dépôts](https://github.com/SforSkill/Project-s-docs/blob/main/REPOSITORY_MAP.md)).
+- Branches, titres de PR (Conventional Commits) et releases : [git-workflow](https://github.com/SforSkill/Project-s-docs/blob/main/docs/git-workflow.md).
+- Travailler sur plusieurs dépôts à la fois : [DEVELOPMENT_SETUP](https://github.com/SforSkill/Project-s-docs/blob/main/DEVELOPMENT_SETUP.md).
+- Contrat modifié (protocole, format de données, API) : version, changelog et dépôts consommateurs dans la même série de PR ([VERSIONING](https://github.com/SforSkill/Project-s-docs/blob/main/VERSIONING.md)).

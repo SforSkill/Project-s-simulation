@@ -1,10 +1,10 @@
 //! Movement collision against the static world plus the other players' boxes.
 
-use engine_core::Aabb;
-use engine_movement::controller::MoveWorld;
-use engine_physics::world::TraceMask;
-use engine_physics::{CollisionWorld, Trace};
 use glam::Vec3;
+use ps_movement::controller::MoveWorld;
+use ps_physics::world::TraceMask;
+use ps_physics::{CollisionWorld, Trace};
+use ps_sim_core::Aabb;
 
 pub struct PlayerWorld<'a> {
     pub world: &'a CollisionWorld,
@@ -62,7 +62,7 @@ impl MoveWorld for PlayerWorld<'_> {
             if let Some((f, n)) = sweep_point_box(start, end, &expanded) {
                 // Same epsilon as the brush traces: stop just before the surface.
                 let len = (end - start).length().max(1e-6);
-                let f = (f - engine_physics::SURFACE_EPSILON / len).max(0.0);
+                let f = (f - ps_physics::SURFACE_EPSILON / len).max(0.0);
                 if f < tr.fraction {
                     tr.fraction = f;
                     tr.normal = n;

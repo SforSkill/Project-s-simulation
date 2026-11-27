@@ -59,11 +59,17 @@ pub fn parse_ron<T: DeserializeOwned>(text: &str, name: &str) -> Result<T, Confi
 
 /// Finds the data directory (containing `configs/` and `maps/`).
 ///
-/// Order: `PROJET_S_DATA` env var, the executable directory, its parents (useful for
-/// `cargo run`), the current directory.
+/// The data is the root of a Project-s-content checkout or release. Order:
+/// `PS_CONTENT_DIR` (or the older `PROJET_S_DATA`) env var, then the executable
+/// directory, its parents and the current directory, each also probed for a
+/// sibling `Project-s-content/` (multi-repository development layout).
 pub fn find_data_dir() -> PathBuf {
-    if let Ok(p) = std::env::var("PROJET_S_DATA") {
-        return PathBuf::from(p);
+    for var in ["PS_CONTENT_DIR", "PROJET_S_DATA"] {
+        if let Ok(p) = std::env::var(var)
+            && !p.is_empty()
+        {
+            return PathBuf::from(p);
+        }
     }
     let mut candidates = Vec::new();
     if let Ok(exe) = std::env::current_exe() {
@@ -77,8 +83,10 @@ pub fn find_data_dir() -> PathBuf {
         candidates.push(cwd);
     }
     for c in &candidates {
-        if c.join("configs").is_dir() && c.join("maps").is_dir() {
-            return c.clone();
+        for dir in [c.clone(), c.join("Project-s-content")] {
+            if dir.join("configs").is_dir() && dir.join("maps").is_dir() {
+                return dir;
+            }
         }
     }
     PathBuf::from(".")

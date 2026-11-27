@@ -1,6 +1,6 @@
 [package]
-name = "game-sim"
-description = "Projet S: authoritative game simulation (players, shooting, grenades, smoke, bomb, bots)"
+name = "ps-sim"
+description = "Project S: authoritative game simulation (players, shooting, grenades, smoke, bomb, bots)"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
@@ -9,19 +9,16 @@ rust-version.workspace = true
 repository.workspace = true
 
 [dependencies]
-engine-core.workspace = true
-engine-physics.workspace = true
-engine-movement.workspace = true
-engine-weapons.workspace = true
-engine-hitreg.workspace = true
-game-rules.workspace = true
+ps-sim-core.workspace = true
+ps-physics.workspace = true
+ps-movement.workspace = true
+ps-weapons.workspace = true
+ps-hitreg.workspace = true
+ps-rules.workspace = true
 glam.workspace = true
 serde.workspace = true
 toml.workspace = true
 ron.workspace = true
-postcard.workspace = true
-engine-network.workspace = true
-engine-replay.workspace = true
 
 [dev-dependencies]
 criterion.workspace = true

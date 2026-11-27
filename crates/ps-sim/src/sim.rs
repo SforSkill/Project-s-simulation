@@ -8,21 +8,21 @@ use crate::grenades::{Fire, Grenade, GrenadeConfig, GrenadeStep, throw_params};
 use crate::level::Level;
 use crate::player::{Controller, Player};
 use crate::smoke::{SmokeConfig, SmokeVolume, smoke_blocks};
-use engine_core::cmd::{Buttons, UserCmd};
-use engine_core::math::offset_direction;
-use engine_core::{Aabb, DetRng, MAX_PLAYERS, PlayerId, Team, TickRate, ViewAngles};
-use engine_hitreg::{LagCompPolicy, Pose, PoseHistory, PoseRecord, hitboxes, ray_vs_hitboxes};
-use engine_movement::MoveState;
-use engine_movement::controller::{MoveInput, hull_for, simulate_segment};
-use engine_physics::map::{SpawnDef, TargetKind};
-use engine_physics::world::RaySegment;
-use engine_weapons::damage::{PenetrationInput, penetrate};
-use engine_weapons::{
+use glam::Vec3;
+use ps_hitreg::{LagCompPolicy, Pose, PoseHistory, PoseRecord, hitboxes, ray_vs_hitboxes};
+use ps_movement::MoveState;
+use ps_movement::controller::{MoveInput, hull_for, simulate_segment};
+use ps_physics::map::{SpawnDef, TargetKind};
+use ps_physics::world::RaySegment;
+use ps_rules::{BombStatus, Match, MatchEvent, Mode, Phase, RulesConfig, add_money};
+use ps_sim_core::cmd::{Buttons, UserCmd};
+use ps_sim_core::math::offset_direction;
+use ps_sim_core::{Aabb, DetRng, MAX_PLAYERS, PlayerId, Team, TickRate, ViewAngles};
+use ps_weapons::damage::{PenetrationInput, penetrate};
+use ps_weapons::{
     GrenadeKind, GunState, HandState, HitGroup, Slot, WeaponEvent, WeaponId, WeaponInput,
     WeaponKind, apply_armor, distance_falloff, movement_spread_deg, spread_offset,
 };
-use game_rules::{BombStatus, Match, MatchEvent, Mode, Phase, RulesConfig, add_money};
-use glam::Vec3;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::sync::Arc;
@@ -1133,12 +1133,12 @@ impl Sim {
         let mut t = 0.0f32;
         let mut surfaces = Vec::new();
         let mut impacts = Vec::new();
-        let mut hit: Option<(PlayerId, engine_hitreg::BodyHit)> = None;
+        let mut hit: Option<(PlayerId, ps_hitreg::BodyHit)> = None;
         let mut penetrated = false;
         let mut end_t = w.range;
         let mut k = 0;
-        let nearest_victim = |t0: f32, t1: f32| -> Option<(PlayerId, engine_hitreg::BodyHit)> {
-            let mut best: Option<(PlayerId, engine_hitreg::BodyHit)> = None;
+        let nearest_victim = |t0: f32, t1: f32| -> Option<(PlayerId, ps_hitreg::BodyHit)> {
+            let mut best: Option<(PlayerId, ps_hitreg::BodyHit)> = None;
             for (vid, hb) in &victims {
                 if let Some(h) = ray_vs_hitboxes(hb, eye, dir, t1)
                     && h.t >= t0
@@ -1610,13 +1610,7 @@ impl Sim {
             }
             d.vel.y -= g * dt;
             let target = d.pos + d.vel * dt;
-            let tr = world.trace_box(
-                d.pos,
-                target,
-                -h,
-                h,
-                engine_physics::world::TraceMask::Players,
-            );
+            let tr = world.trace_box(d.pos, target, -h, h, ps_physics::world::TraceMask::Players);
             d.pos = tr.end;
             if tr.fraction < 1.0 {
                 if tr.normal.y > 0.7 {
@@ -1633,7 +1627,7 @@ impl Sim {
                 *pos - Vec3::Y * 8.0,
                 -h,
                 h,
-                engine_physics::world::TraceMask::Players,
+                ps_physics::world::TraceMask::Players,
             );
             if tr.fraction >= 1.0 {
                 *pos = tr.end;
@@ -2300,7 +2294,7 @@ impl Sim {
                 buttons_start: b,
                 view_start: v,
                 view_end: v,
-                view_time: engine_core::SimTime::new(self.tick, 0.0),
+                view_time: ps_sim_core::SimTime::new(self.tick, 0.0),
                 ..Default::default()
             });
         }

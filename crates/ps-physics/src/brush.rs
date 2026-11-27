@@ -2,8 +2,8 @@
 
 use crate::SURFACE_EPSILON;
 use crate::material::MaterialId;
-use engine_core::Aabb;
 use glam::Vec3;
+use ps_sim_core::Aabb;
 
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Plane {

@@ -2,7 +2,7 @@
 
 use crate::defs::{WeaponDef, WeaponKind};
 use crate::spread::recoil_offset;
-use engine_core::cmd::Buttons;
+use ps_sim_core::cmd::Buttons;
 
 /// Ammunition of one gun.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default, serde::Serialize, serde::Deserialize)]

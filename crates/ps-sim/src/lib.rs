@@ -1,5 +1,8 @@
-//! Projet S authoritative game simulation, shared by the dedicated server and the
-//! local (embedded) server of the client.
+//! Project S authoritative game simulation, shared by the dedicated server, the
+//! local (embedded) server of the client and the client prediction.
+//!
+//! Wire messages, prediction and replays live in `ps-sim-net`, so this crate has
+//! no network or replay dependency.
 //!
 //! Pure Rust, no I/O except [`data::GameData::load`]; deterministic for a given
 //! seed and command stream.
@@ -11,9 +14,6 @@ pub mod events;
 pub mod grenades;
 pub mod level;
 pub mod player;
-pub mod predict;
-pub mod proto;
-pub mod record;
 pub mod sim;
 pub mod smoke;
 

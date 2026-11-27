@@ -2,7 +2,7 @@
 //! overtime and the competitive economy. Pure state machine: it knows nothing about
 //! the world, the sim feeds it alive counts and the bomb status.
 
-use engine_core::Team;
+use ps_sim_core::Team;
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
@@ -854,22 +854,5 @@ mod tests {
                 ..
             }
         ));
-    }
-
-    #[test]
-    fn shipped_rules_file_is_valid() {
-        let path = concat!(env!("CARGO_MANIFEST_DIR"), "/../../configs/rules.toml");
-        let f = RulesFile::from_toml(&std::fs::read_to_string(path).unwrap()).unwrap();
-        for p in [
-            "competitive",
-            "competitive_mr12",
-            "competitive_mr16",
-            "duel",
-            "deathmatch",
-            "training",
-        ] {
-            assert!(f.profiles.contains_key(p), "{p}");
-        }
-        assert_eq!(f.profiles["competitive"].max_rounds, 30);
     }
 }

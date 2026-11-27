@@ -3,8 +3,7 @@
 /replays
 *.psrp
 .git/ai-logs/
-/benchmarks/results/*.tmp
-/configs/local*.toml
+/Project-s-content
 .env
 *.pem
 *.key

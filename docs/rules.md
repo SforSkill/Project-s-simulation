@@ -1,6 +1,6 @@
 # Règles de match
 
-Code : `crates/game-rules/src/lib.rs` (machine d'état pure, sans E/S ni connaissance de la carte). Profils : `configs/rules.toml`, choisis par `profile` dans `server.toml`, `--rules <profil>` ou le menu du client.
+Code : `crates/ps-rules/src/lib.rs` (machine d'état pure, sans E/S ni connaissance de la carte). Profils : `configs/rules.toml`, choisis par `profile` dans `server.toml`, `--rules <profil>` ou le menu du client.
 
 ## Modes
 

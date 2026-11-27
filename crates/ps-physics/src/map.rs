@@ -7,8 +7,8 @@
 
 use crate::brush::Brush;
 use crate::material::{MaterialId, MaterialTable};
-use engine_core::{Aabb, Team};
 use glam::Vec3;
+use ps_sim_core::{Aabb, Team};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]

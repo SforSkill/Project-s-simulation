@@ -1,10 +1,10 @@
 //! Player state.
 
-use engine_core::cmd::UserCmd;
-use engine_core::{PlayerId, Team, ViewAngles};
-use engine_movement::MoveState;
-use engine_weapons::{Catalog, GunState, HandState, Slot, WeaponDef, WeaponId, WeaponKind};
 use glam::Vec3;
+use ps_movement::MoveState;
+use ps_sim_core::cmd::UserCmd;
+use ps_sim_core::{PlayerId, Team, ViewAngles};
+use ps_weapons::{Catalog, GunState, HandState, Slot, WeaponDef, WeaponId, WeaponKind};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub enum Controller {

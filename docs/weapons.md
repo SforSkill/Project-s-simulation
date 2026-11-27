@@ -16,7 +16,7 @@ Grenades : flash (200), fumigène (300), molotov (500), explosive (300).
 
 ## Règles
 
-Elles sont appliquées par `engine-weapons` et vérifiées par ses tests.
+Elles sont appliquées par `ps-weapons` et vérifiées par ses tests.
 
 1. **Pas de dispersion intrinsèque.** Au sol, sous le seuil de précision
    (`accurate_fraction` × vitesse max de l'arme), la balle part exactement là où
@@ -36,7 +36,7 @@ Elles sont appliquées par `engine-weapons` et vérifiées par ses tests.
 
 ## Aléa et triche
 
-Le générateur (`engine-core/src/rng.rs`) n'est utilisé que pour la dispersion
+Le générateur (`ps-sim-core/src/rng.rs`) n'est utilisé que pour la dispersion
 de mouvement et les décisions des bots. Pour chaque tir, le serveur dérive le
 flux à partir d'une graine de match secrète : un client ne peut pas prévoir la
 dispersion de son prochain tir. La prédiction locale de l'impact sert uniquement

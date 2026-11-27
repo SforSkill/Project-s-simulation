@@ -1,6 +1,6 @@
 # Grenades, feu et fumée
 
-Code : `crates/game-sim/src/grenades.rs` (projectiles, molotov), `crates/game-sim/src/smoke.rs` (fumée), catalogue et prix : `configs/weapons.toml` (`flash`, `smoke`, `molotov`, `he`), maximum 4 grenades (`[equipment].max_grenades`). Décision sur la fumée : [ADR 0004](decisions/0004-hybrid-smoke.md).
+Code : `crates/ps-sim/src/grenades.rs` (projectiles, molotov), `crates/ps-sim/src/smoke.rs` (fumée), catalogue et prix : `configs/weapons.toml` (`flash`, `smoke`, `molotov`, `he`), maximum 4 grenades (`[equipment].max_grenades`). Décision sur la fumée : [ADR 0004](https://github.com/SforSkill/Project-s-docs/blob/main/docs/decisions/0004-hybrid-smoke.md).
 
 Les constantes ci-dessous sont encore dans le code (`GrenadeConfig::default`, `SmokeConfig::default`, portées par `SimConfig`), pas dans `configs/` : les y déplacer est un travail à faire.
 

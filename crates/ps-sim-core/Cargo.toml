@@ -1,6 +1,6 @@
 [package]
-name = "engine-core"
-description = "Projet S: shared math, ticks, user commands, deterministic RNG and config loading"
+name = "ps-sim-core"
+description = "Project S simulation foundations: math, deterministic RNG, sensitivity and data loading"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
@@ -9,6 +9,7 @@ rust-version.workspace = true
 repository.workspace = true
 
 [dependencies]
+ps-types.workspace = true
 glam.workspace = true
 serde.workspace = true
 toml.workspace = true

@@ -1,5 +1,5 @@
 [package]
-name = "engine-hitreg"
+name = "ps-hitreg"
 description = "Projet S: player hitboxes, pose history and bounded lag compensation"
 version.workspace = true
 edition.workspace = true
@@ -9,8 +9,8 @@ rust-version.workspace = true
 repository.workspace = true
 
 [dependencies]
-engine-core.workspace = true
-engine-weapons.workspace = true
+ps-sim-core.workspace = true
+ps-weapons.workspace = true
 glam.workspace = true
 serde.workspace = true
 

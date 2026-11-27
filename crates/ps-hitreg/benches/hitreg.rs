@@ -1,6 +1,6 @@
 use criterion::{Criterion, criterion_group, criterion_main};
-use engine_hitreg::{Pose, hitboxes, ray_vs_hitboxes};
 use glam::Vec3;
+use ps_hitreg::{Pose, hitboxes, ray_vs_hitboxes};
 use std::hint::black_box;
 
 fn bench(c: &mut Criterion) {

@@ -1,0 +1,58 @@
+name: Release Please
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-please
+  cancel-in-progress: false
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.rp.outputs.release_created }}
+      tag_name: ${{ steps.rp.outputs.tag_name }}
+      pr_branch: ${{ steps.rp.outputs.pr && fromJSON(steps.rp.outputs.pr).headBranchName }}
+    steps:
+      - uses: actions/create-github-app-token@v2
+        id: app
+        with:
+          app-id: ${{ vars.RELEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+      - uses: googleapis/release-please-action@v4
+        id: rp
+        with:
+          token: ${{ steps.app.outputs.token }}
+
+  # release-please bumps Cargo.toml but not Cargo.lock, and CI builds with --locked.
+  lockfile:
+    needs: release-please
+    if: needs.release-please.outputs.pr_branch
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/create-github-app-token@v2
+        id: app
+        with:
+          app-id: ${{ vars.RELEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.release-please.outputs.pr_branch }}
+          token: ${{ steps.app.outputs.token }}
+      - name: Sync Cargo.lock with the new version
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token }}
+          BOT: ${{ steps.app.outputs.app-slug }}[bot]
+        run: |
+          cargo update --workspace
+          git diff --quiet Cargo.lock && exit 0
+          id=$(gh api "/users/${BOT}" --jq .id)
+          git config user.name "$BOT"
+          git config user.email "${id}+${BOT}@users.noreply.github.com"
+          git commit -am "chore: synchronise Cargo.lock"
+          git push

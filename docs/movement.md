@@ -1,6 +1,6 @@
 # Déplacement
 
-`engine-movement` réimplémente le modèle `CGameMovement` des jeux Source à
+`ps-movement` réimplémente le modèle `CGameMovement` des jeux Source à
 partir de la description publique de l'algorithme. Aucun code n'est copié.
 
 - Friction au sol avec `stop_speed`, et accélération vers une vitesse souhaitée
@@ -31,7 +31,7 @@ glissade résiduelle. Deux modes interchangeables sont fournis
   supprimée. Le mode ne freine jamais plus fort que la physique et ne repart
   jamais dans l'autre sens. Il n'aide pas les tapotements courts.
 
-Mesures du test `comparison_table` (`cargo test --release -p engine-movement --test counter_strafe comparison_table -- --nocapture`), à 128 Hz :
+Mesures du test `comparison_table` (`cargo test --release -p ps-movement --test counter_strafe comparison_table -- --nocapture`), à 128 Hz :
 
 | Mode | Scénario | Précis après (ms) | Arrêt (ms) | Distance (u) | Vitesse résiduelle (u/s) |
 |---|---|---|---|---|---|

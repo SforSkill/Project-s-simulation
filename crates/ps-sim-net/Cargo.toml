@@ -1,0 +1,24 @@
+[package]
+name = "ps-sim-net"
+description = "Project S: game wire messages, client prediction and replay recording on top of ps-sim"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+
+[dependencies]
+ps-sim.workspace = true
+ps-sim-core.workspace = true
+ps-movement.workspace = true
+ps-weapons.workspace = true
+ps-rules.workspace = true
+ps-transport.workspace = true
+ps-replay.workspace = true
+glam.workspace = true
+serde.workspace = true
+postcard.workspace = true
+
+[lints]
+workspace = true

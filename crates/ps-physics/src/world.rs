@@ -2,8 +2,8 @@
 
 use crate::brush::Brush;
 use crate::material::MaterialId;
-use engine_core::Aabb;
 use glam::Vec3;
+use ps_sim_core::Aabb;
 
 /// Result of a swept box or ray trace.
 #[derive(Debug, Clone, Copy, PartialEq)]

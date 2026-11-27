@@ -1,5 +1,5 @@
 # Signaler une vulnérabilité
 
-Ne pas ouvrir d'issue publique. Utiliser **Security → Report a vulnerability** sur le repo GitHub (avis de sécurité privé).
+Ne pas ouvrir d'issue publique. Utiliser **Security → Report a vulnerability** sur le dépôt GitHub (avis de sécurité privé).
 
-Modèle de menace et protections du jeu (chiffrement, anti-triche côté serveur, limites) : [`docs/security.md`](docs/security.md).
+Frontières de sécurité de l'écosystème : [SECURITY_BOUNDARIES](https://github.com/SforSkill/Project-s-docs/blob/main/SECURITY_BOUNDARIES.md).

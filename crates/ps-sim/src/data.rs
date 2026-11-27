@@ -1,10 +1,10 @@
 //! Game data loaded from the data directory (`configs/`, `maps/`).
 
-use engine_movement::MovementConfig;
-use engine_physics::map::MapDef;
-use engine_physics::material::MaterialTable;
-use engine_weapons::Catalog;
-use game_rules::{RulesConfig, RulesFile};
+use ps_movement::MovementConfig;
+use ps_physics::map::MapDef;
+use ps_physics::material::MaterialTable;
+use ps_rules::{RulesConfig, RulesFile};
+use ps_weapons::Catalog;
 use std::collections::BTreeMap;
 use std::path::Path;
 

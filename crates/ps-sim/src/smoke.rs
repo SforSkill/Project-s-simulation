@@ -7,8 +7,8 @@
 //! Line of sight is symmetric (the same voxel test from both ends), which rules out
 //! one-way smokes. Bullets do not modify the volume.
 
-use engine_physics::CollisionWorld;
 use glam::{IVec3, Vec3};
+use ps_physics::CollisionWorld;
 use serde::{Deserialize, Serialize};
 use std::collections::VecDeque;
 
@@ -267,7 +267,7 @@ impl SmokeVolume {
         }
         let dir = d / len;
         // Clip the segment to the grid bounds.
-        let aabb = engine_core::Aabb::new(bmin, bmax);
+        let aabb = ps_sim_core::Aabb::new(bmin, bmax);
         let Some((t0, t1)) = aabb.ray_interval(a, dir) else {
             return false;
         };

@@ -1,5 +1,9 @@
 //! Small geometric helpers shared by simulation and rendering.
 
+pub use ps_types::angles::{
+    MAX_PITCH, ViewAngles, angles_to_forward, forward_to_angles, wrap_degrees,
+};
+
 use glam::Vec3;
 use serde::{Deserialize, Serialize};
 
@@ -107,81 +111,6 @@ impl Aabb {
     }
 }
 
-/// View angles in degrees.
-#[derive(Debug, Clone, Copy, Default, PartialEq, Serialize, Deserialize)]
-pub struct ViewAngles {
-    /// Positive looks up, clamped to ±89°.
-    pub pitch: f32,
-    /// Positive turns left; kept in (−180, 180].
-    pub yaw: f32,
-}
-
-pub const MAX_PITCH: f32 = 89.0;
-
-impl ViewAngles {
-    pub fn new(pitch: f32, yaw: f32) -> Self {
-        Self { pitch, yaw }.normalized()
-    }
-
-    pub fn normalized(self) -> Self {
-        Self {
-            pitch: self.pitch.clamp(-MAX_PITCH, MAX_PITCH),
-            yaw: wrap_degrees(self.yaw),
-        }
-    }
-
-    pub fn forward(&self) -> Vec3 {
-        angles_to_forward(self.pitch, self.yaw)
-    }
-
-    /// Horizontal right vector.
-    pub fn right_flat(&self) -> Vec3 {
-        let y = self.yaw.to_radians();
-        Vec3::new(y.cos(), 0.0, -y.sin())
-    }
-
-    /// Horizontal forward vector.
-    pub fn forward_flat(&self) -> Vec3 {
-        let y = self.yaw.to_radians();
-        Vec3::new(-y.sin(), 0.0, -y.cos())
-    }
-
-    /// Shortest interpolation (yaw wraps).
-    pub fn lerp(self, other: ViewAngles, t: f32) -> ViewAngles {
-        let dy = wrap_degrees(other.yaw - self.yaw);
-        ViewAngles {
-            pitch: self.pitch + (other.pitch - self.pitch) * t,
-            yaw: wrap_degrees(self.yaw + dy * t),
-        }
-    }
-}
-
-/// Wraps an angle in degrees to (−180, 180].
-pub fn wrap_degrees(a: f32) -> f32 {
-    let mut r = a % 360.0;
-    if r > 180.0 {
-        r -= 360.0;
-    } else if r <= -180.0 {
-        r += 360.0;
-    }
-    r
-}
-
-/// Unit direction for (pitch, yaw) in degrees.
-pub fn angles_to_forward(pitch: f32, yaw: f32) -> Vec3 {
-    let p = pitch.to_radians();
-    let y = yaw.to_radians();
-    Vec3::new(-y.sin() * p.cos(), p.sin(), -y.cos() * p.cos())
-}
-
-/// (pitch, yaw) in degrees of a direction.
-pub fn forward_to_angles(dir: Vec3) -> ViewAngles {
-    let d = dir.normalize_or(Vec3::NEG_Z);
-    let pitch = d.y.clamp(-1.0, 1.0).asin().to_degrees();
-    let yaw = (-d.x).atan2(-d.z).to_degrees();
-    ViewAngles { pitch, yaw }
-}
-
 /// Orthonormal basis (right, up) perpendicular to `dir`, used to apply angular offsets.
 pub fn basis_from_forward(dir: Vec3) -> (Vec3, Vec3) {
     let f = dir.normalize_or(Vec3::NEG_Z);
@@ -200,39 +129,6 @@ pub fn offset_direction(dir: Vec3, pitch_up_deg: f32, yaw_left_deg: f32) -> Vec3
 #[cfg(test)]
 mod tests {
     use super::*;
-
-    #[test]
-    fn forward_conventions() {
-        assert!(angles_to_forward(0.0, 0.0).abs_diff_eq(Vec3::NEG_Z, 1e-6));
-        assert!(angles_to_forward(0.0, 90.0).abs_diff_eq(Vec3::NEG_X, 1e-6));
-        assert!(angles_to_forward(90.0, 0.0).abs_diff_eq(Vec3::Y, 1e-6));
-        let a = ViewAngles::new(10.0, 37.0);
-        let back = forward_to_angles(a.forward());
-        assert!((back.pitch - 10.0).abs() < 1e-3 && (back.yaw - 37.0).abs() < 1e-3);
-    }
-
-    #[test]
-    fn right_is_perpendicular_and_to_the_right() {
-        let a = ViewAngles::new(0.0, 0.0);
-        assert!(a.right_flat().abs_diff_eq(Vec3::X, 1e-6));
-        for yaw in [-170.0f32, -45.0, 12.0, 133.0] {
-            let v = ViewAngles::new(0.0, yaw);
-            assert!(v.right_flat().dot(v.forward_flat()).abs() < 1e-6);
-            // right = forward × up
-            assert!(
-                v.forward_flat()
-                    .cross(Vec3::Y)
-                    .abs_diff_eq(v.right_flat(), 1e-5)
-            );
-        }
-    }
-
-    #[test]
-    fn wrap() {
-        assert_eq!(wrap_degrees(190.0), -170.0);
-        assert_eq!(wrap_degrees(-180.0), 180.0);
-        assert_eq!(wrap_degrees(540.0), 180.0);
-    }
 
     #[test]
     fn aabb_ray() {

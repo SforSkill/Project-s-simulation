@@ -7,10 +7,10 @@
 //! drawing, Shot Inspector) and the server (authoritative test), so both sides agree
 //! exactly when the poses agree.
 
-use engine_core::Aabb;
-use engine_core::math::wrap_degrees;
-use engine_weapons::HitGroup;
 use glam::Vec3;
+use ps_sim_core::Aabb;
+use ps_sim_core::math::wrap_degrees;
+use ps_weapons::HitGroup;
 use serde::{Deserialize, Serialize};
 use std::collections::VecDeque;
 

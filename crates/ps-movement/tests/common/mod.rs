@@ -1,11 +1,11 @@
 #![allow(dead_code)]
 
-use engine_core::Aabb;
-use engine_core::cmd::{ButtonEvent, Buttons, UserCmd};
-use engine_core::math::ViewAngles;
-use engine_movement::{MoveState, MovementConfig, simulate_cmd};
-use engine_physics::{Brush, CollisionWorld, MaterialId};
 use glam::Vec3;
+use ps_movement::{MoveState, MovementConfig, simulate_cmd};
+use ps_physics::{Brush, CollisionWorld, MaterialId};
+use ps_sim_core::Aabb;
+use ps_sim_core::cmd::{ButtonEvent, Buttons, UserCmd};
+use ps_sim_core::math::ViewAngles;
 
 pub fn flat_world() -> CollisionWorld {
     CollisionWorld::new(vec![Brush::from_box(

@@ -1,0 +1,23 @@
+version: 2
+multi-ecosystem-groups:
+  dependencies:
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: chore
+      include: scope
+updates:
+  - package-ecosystem: cargo
+    directory: /
+    patterns: ["*"]
+    multi-ecosystem-group: dependencies
+    # glam suit la version réexportée par bevy_math ; Bevy se migre à la main.
+    ignore:
+      - dependency-name: glam
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+      - dependency-name: "bevy*"
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+  - package-ecosystem: github-actions
+    directory: /
+    patterns: ["*"]
+    multi-ecosystem-group: dependencies

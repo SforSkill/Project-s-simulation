@@ -1,9 +1,9 @@
 use criterion::{Criterion, criterion_group, criterion_main};
-use engine_core::Aabb;
-use engine_core::cmd::{Buttons, UserCmd};
-use engine_movement::{MoveState, MovementConfig, simulate_cmd};
-use engine_physics::{Brush, CollisionWorld, MaterialId};
 use glam::Vec3;
+use ps_movement::{MoveState, MovementConfig, simulate_cmd};
+use ps_physics::{Brush, CollisionWorld, MaterialId};
+use ps_sim_core::Aabb;
+use ps_sim_core::cmd::{Buttons, UserCmd};
 
 fn bench(c: &mut Criterion) {
     let mut b = vec![Brush::from_box(

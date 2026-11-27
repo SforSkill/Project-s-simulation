@@ -1,18 +1,18 @@
-//! Game protocol carried by `engine-network` channels.
+//! Game protocol carried by `ps-transport` channels.
 //!
 //! Control messages use postcard (serde); snapshots use a hand-written,
 //! quantized and delta-compressed binary format (see `docs/network.md`).
 
-use crate::events::GameEvent;
-use crate::sim::SimConfig;
-use engine_core::cmd::UserCmd;
-use engine_core::{PlayerId, Team};
-use engine_movement::MoveState;
-use engine_network::NetError;
-use engine_network::wire::{Reader, Writer};
-use engine_weapons::{GrenadeKind, GunState, HandState, HitGroup, Slot, WeaponId};
-use game_rules::{Phase, RulesConfig};
 use glam::{IVec3, Vec3};
+use ps_movement::MoveState;
+use ps_rules::{Phase, RulesConfig};
+use ps_sim::events::GameEvent;
+use ps_sim::sim::SimConfig;
+use ps_sim_core::cmd::UserCmd;
+use ps_sim_core::{PlayerId, Team};
+use ps_transport::NetError;
+use ps_transport::wire::{Reader, Writer};
+use ps_weapons::{GrenadeKind, GunState, HandState, HitGroup, Slot, WeaponId};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 

@@ -3,12 +3,12 @@
 
 use crate::player::Player;
 use crate::sim::{BombState, Sim};
-use engine_core::cmd::{Buttons, UserCmd};
-use engine_core::math::{forward_to_angles, wrap_degrees};
-use engine_core::{DetRng, PlayerId, SimTime, Team, ViewAngles};
-use engine_weapons::{Slot, WeaponKind};
-use game_rules::{Mode, Phase};
 use glam::Vec3;
+use ps_rules::{Mode, Phase};
+use ps_sim_core::cmd::{Buttons, UserCmd};
+use ps_sim_core::math::{forward_to_angles, wrap_degrees};
+use ps_sim_core::{DetRng, PlayerId, SimTime, Team, ViewAngles};
+use ps_weapons::{Slot, WeaponKind};
 
 #[derive(Debug, Clone)]
 pub struct BotBrain {

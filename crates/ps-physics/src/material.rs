@@ -10,7 +10,7 @@ pub struct MaterialId(pub u16);
 pub struct MaterialDef {
     pub name: String,
     /// Hardness: penetration power consumed per 8 units of thickness
-    /// (see `engine_weapons::damage::penetrate`). `0` = cannot be penetrated;
+    /// (see `ps_weapons::damage::penetrate`). `0` = cannot be penetrated;
     /// higher means harder.
     pub penetration_modifier: f32,
     /// Fraction of damage kept after crossing one unit of this material (applied

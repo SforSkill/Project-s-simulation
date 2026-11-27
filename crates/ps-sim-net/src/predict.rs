@@ -1,16 +1,16 @@
 //! Client-side movement prediction: the exact movement path of
 //! `Sim::run_cmd` (same segments, same collision), without weapons or rules.
 
-use crate::collide::{PlayerWorld, player_box};
-use crate::data::GameData;
-use crate::level::Level;
 use crate::proto::SelfState;
-use engine_core::Aabb;
-use engine_core::cmd::UserCmd;
-use engine_movement::MoveState;
-use engine_movement::controller::{MoveInput, hull_for, simulate_segment};
-use engine_weapons::{Slot, WeaponKind};
 use glam::Vec3;
+use ps_movement::MoveState;
+use ps_movement::controller::{MoveInput, hull_for, simulate_segment};
+use ps_sim::collide::{PlayerWorld, player_box};
+use ps_sim::data::GameData;
+use ps_sim::level::Level;
+use ps_sim_core::Aabb;
+use ps_sim_core::cmd::UserCmd;
+use ps_weapons::{Slot, WeaponKind};
 
 /// Movement speed cap of the weapon in hand (same rule as `Player::speed_cap`).
 pub fn speed_cap(data: &GameData, me: &SelfState) -> f32 {

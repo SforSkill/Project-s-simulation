@@ -1,11 +1,11 @@
 //! Kinematic Source-style controller.
 
 use crate::config::{CounterStrafeMode, MovementConfig};
-use engine_core::cmd::{Buttons, UserCmd};
-use engine_core::math::ViewAngles;
-use engine_physics::world::TraceMask;
-use engine_physics::{CollisionWorld, Trace};
 use glam::Vec3;
+use ps_physics::world::TraceMask;
+use ps_physics::{CollisionWorld, Trace};
+use ps_sim_core::cmd::{Buttons, UserCmd};
+use ps_sim_core::math::ViewAngles;
 
 /// Collision queries needed by the controller. The game simulation implements it
 /// with the static world plus the other players' boxes.
@@ -597,4 +597,4 @@ fn stay_on_ground(state: &mut MoveState, cfg: &MovementConfig, world: &impl Move
     }
 }
 
-const SURFACE: f32 = engine_physics::SURFACE_EPSILON;
+const SURFACE: f32 = ps_physics::SURFACE_EPSILON;

@@ -1,5 +1,5 @@
 [package]
-name = "engine-physics"
+name = "ps-physics"
 description = "Projet S: deterministic brush collision world, box traces, ray segments, map format"
 version.workspace = true
 edition.workspace = true
@@ -9,7 +9,7 @@ rust-version.workspace = true
 repository.workspace = true
 
 [dependencies]
-engine-core.workspace = true
+ps-sim-core.workspace = true
 glam.workspace = true
 serde.workspace = true
 thiserror.workspace = true

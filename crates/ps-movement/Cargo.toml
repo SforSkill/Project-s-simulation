@@ -1,5 +1,5 @@
 [package]
-name = "engine-movement"
+name = "ps-movement"
 description = "Projet S: Source/CS:GO-style kinematic player movement shared by server and client prediction"
 version.workspace = true
 edition.workspace = true
@@ -9,8 +9,8 @@ rust-version.workspace = true
 repository.workspace = true
 
 [dependencies]
-engine-core.workspace = true
-engine-physics.workspace = true
+ps-sim-core.workspace = true
+ps-physics.workspace = true
 glam.workspace = true
 serde.workspace = true
 

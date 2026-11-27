@@ -1,10 +1,10 @@
 //! Criterion benchmark of the collision queries used every tick.
 
 use criterion::{Criterion, criterion_group, criterion_main};
-use engine_core::Aabb;
-use engine_physics::world::TraceMask;
-use engine_physics::{Brush, CollisionWorld, MaterialId};
 use glam::Vec3;
+use ps_physics::world::TraceMask;
+use ps_physics::{Brush, CollisionWorld, MaterialId};
+use ps_sim_core::Aabb;
 use std::hint::black_box;
 
 fn grid_world() -> CollisionWorld {

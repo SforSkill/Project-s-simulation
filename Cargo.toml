@@ -1,0 +1,56 @@
+[workspace]
+resolver = "3"
+members = [
+    "crates/ps-sim-core",
+    "crates/ps-physics",
+    "crates/ps-movement",
+    "crates/ps-weapons",
+    "crates/ps-hitreg",
+    "crates/ps-rules",
+    "crates/ps-sim",
+    "crates/ps-sim-net",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.90"
+license = "LicenseRef-Proprietary"
+publish = false
+repository = "https://github.com/SforSkill/Project-s-simulation"
+
+[workspace.dependencies]
+ps-sim-core = { path = "crates/ps-sim-core", version = "0.1.0" }
+ps-physics = { path = "crates/ps-physics", version = "0.1.0" }
+ps-movement = { path = "crates/ps-movement", version = "0.1.0" }
+ps-weapons = { path = "crates/ps-weapons", version = "0.1.0" }
+ps-hitreg = { path = "crates/ps-hitreg", version = "0.1.0" }
+ps-rules = { path = "crates/ps-rules", version = "0.1.0" }
+ps-sim = { path = "crates/ps-sim", version = "0.1.0" }
+
+ps-types = { git = "https://github.com/SforSkill/Project-s-protocol", tag = "v0.1.0" }
+ps-replay = { git = "https://github.com/SforSkill/Project-s-protocol", tag = "v0.1.0" }
+ps-transport = { git = "https://github.com/SforSkill/Project-s-netcode", tag = "v0.1.0" }
+
+# glam 0.33 is the version re-exported by bevy_math 0.20: the simulation and the
+# client share the very same vector types.
+glam = { version = "0.33", features = ["serde"] }
+serde = { version = "1", features = ["derive"] }
+toml = "1"
+ron = "0.12"
+postcard = { version = "1", default-features = false, features = ["use-std"] }
+thiserror = "2"
+criterion = { version = "0.8", default-features = false }
+
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
+
+[workspace.lints.rust]
+unsafe_code = "deny"
+
+[workspace.lints.clippy]
+too_many_arguments = "allow"
+type_complexity = "allow"

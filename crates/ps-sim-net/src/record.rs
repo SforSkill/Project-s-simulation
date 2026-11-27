@@ -3,14 +3,14 @@
 //! fresh `Sim` with the same data reproduces the match exactly (bots included,
 //! since they are part of the simulation).
 
-use crate::data::GameData;
-use crate::level::Level;
-use crate::player::Controller;
-use crate::sim::{Sim, SimConfig};
-use engine_core::cmd::UserCmd;
-use engine_core::{MAX_PLAYERS, PlayerId, Team};
-use engine_replay::{ReplayError, ReplayReader, ReplayWriter};
-use game_rules::RulesConfig;
+use ps_replay::{ReplayError, ReplayReader, ReplayWriter};
+use ps_rules::RulesConfig;
+use ps_sim::data::GameData;
+use ps_sim::level::Level;
+use ps_sim::player::Controller;
+use ps_sim::sim::{Sim, SimConfig};
+use ps_sim_core::cmd::UserCmd;
+use ps_sim_core::{MAX_PLAYERS, PlayerId, Team};
 use serde::{Deserialize, Serialize};
 use std::io::{Read, Write};
 use std::sync::Arc;
@@ -230,7 +230,7 @@ pub fn play<R: Read>(
                 .drain()
                 .0
                 .iter()
-                .filter(|e| matches!(e, crate::GameEvent::Kill { .. }))
+                .filter(|e| matches!(e, ps_sim::GameEvent::Kill { .. }))
                 .count();
             on_tick(&mut sim);
         }
@@ -251,7 +251,7 @@ pub fn play<R: Read>(
             .drain()
             .0
             .iter()
-            .filter(|e| matches!(e, crate::GameEvent::Kill { .. }))
+            .filter(|e| matches!(e, ps_sim::GameEvent::Kill { .. }))
             .count();
         on_tick(&mut sim);
     }
